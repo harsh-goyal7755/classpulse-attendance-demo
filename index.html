@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A privacy-first classroom attendance and engagement dashboard concept.">
+  <title>ClassPulse — Attendance &amp; Engagement</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="#overview"><span class="brandmark">✳</span>class<span>pulse</span></a>
+  <small class="section-label">WORKSPACE</small>
+  <nav><a class="active" href="index.html">◫ &nbsp; Overview</a><a href="#students">♙ &nbsp; Students</a><a href="#insights">▥ &nbsp; Insights</a><a href="session.html">◷ &nbsp; Live session</a></nav>
+  <div class="bottom"><div class="privacy"><b>✦ &nbsp; Privacy first</b><p>Sample data only.<br>Nothing is recorded.</p></div><div class="profile"><span class="avatar teacher">AM</span><span><b>Alex Morgan</b><small>Educator</small></span><span class="dots">···</span></div></div>
+</aside>
+<main id="overview">
+<header><button id="menu" class="hamburger" aria-label="Toggle navigation">☰</button><div class="crumb">Workspace <span>/</span> <b>Overview</b></div><div class="head-right"><span id="todayDate">Today</span><span class="avatar teacher">AM</span></div></header>
+  <div class="content">
+    <section class="welcome"><div><small class="eyebrow"><i></i> YOUR CLASSROOM AT A GLANCE <span class="sample-badge">SAMPLE DATA</span></small><h1>Good morning, Alex <em>✦</em></h1><p>Illustrative overview metrics; use Live session for local sensor readings.</p></div><a class="outline start-link" href="session.html">▶ &nbsp; Start a session</a></section>
+    <section class="stats">
+      <article class="card stat"><div>Attendance today <span class="icon lavender">♙</span></div><strong>24<small> / 28</small></strong><p><b class="up">↑ 4%</b> vs. class average <span class="bars">▂▄▃▅▄▆▅▇</span></p></article>
+      <article class="card stat"><div>Class engagement <span class="icon lilac">✦</span></div><strong>82<small>%</small></strong><p><b class="up">↑ 6%</b> vs. last session <span class="spark">⌁⌁⌁</span></p></article>
+      <article class="card stat"><div>Participation <span class="icon mint">↗</span></div><strong>18<small> learners</small></strong><p><b class="up">↑ 3</b> contributed today <span class="bars green">▂▄▃▅▄▆▅▇</span></p></article>
+      <article class="card stat"><div>Sessions this week <span class="icon amber">◷</span></div><strong>6<small> / 8</small></strong><p><b class="neutral">On track</b> weekly goal <span class="progress"><i></i></span></p></article>
+    </section>
+    <section class="middle" id="insights">
+      <article class="card chart-card"><div class="panel-head"><div><h2>Engagement over time</h2><p>Participation signals across recent sessions</p></div><button class="outline small">This week ⌄</button></div>
+        <div class="legend"><span><i class="key purple"></i> Engagement</span><span><i class="key green-key"></i> Participation</span></div>
+        <div class="chart"><div class="ylabels"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><div class="plot"><div class="grid"><i></i><i></i><i></i><i></i><i></i></div><svg viewBox="0 0 700 180" preserveAspectRatio="none" aria-label="Illustrative weekly engagement chart"><defs><linearGradient id="shade" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7068ed" stop-opacity=".2"/><stop offset="1" stop-color="#7068ed" stop-opacity="0"/></linearGradient></defs><path class="area" d="M0 106 C70 98 90 68 145 80 S220 96 280 66 S360 83 420 51 S500 63 560 36 S640 44 700 18 L700 180 L0 180Z"/><path class="line violetline" d="M0 106 C70 98 90 68 145 80 S220 96 280 66 S360 83 420 51 S500 63 560 36 S640 44 700 18"/><path class="line greenline" d="M0 136 C65 126 90 140 145 118 S220 130 280 105 S360 123 420 91 S500 107 560 78 S645 94 700 61"/></svg><div class="xlabels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div></div></div>
+        <div class="insight-note">✦ &nbsp; <span><b>Nice momentum!</b> Engagement has trended up across your last 3 sessions.</span></div>
+      </article>
+      <article class="card highlights"><div class="panel-head"><div><h2>Class highlights</h2><p>A few things to notice</p></div><button class="dots">···</button></div>
+        <div class="highlight"><i class="badge lavender">✦</i><div><b>Strong start today</b><p>Class engagement is 6% above your recent average.</p><small>10 min ago</small></div></div>
+        <div class="highlight"><i class="badge mint">↗</i><div><b>More voices heard</b><p>18 learners participated in today’s session.</p><small>32 min ago</small></div></div>
+        <div class="highlight"><i class="badge amber">◷</i><div><b>4 learners absent</b><p>Attendance is at 86% for this session.</p><small>Today, 9:05 AM</small></div></div>
+        <button class="link" id="allInsights">View all insights →</button>
+      </article>
+    </section>
+    <section class="card roster" id="students"><div class="panel-head roster-head"><div><h2>Today’s class</h2><p>Attendance and participation snapshot</p></div><div class="tools"><label class="search">⌕ <input id="search" placeholder="Search learners" aria-label="Search learners"></label><button class="outline small">All learners⌄</button></div></div>
+      <div class="table-scroll"><table><thead><tr><th>LEARNER</th><th>ATTENDANCE</th><th>PARTICIPATION</th><th>LAST ACTIVE</th><th></th></tr></thead><tbody id="rows"></tbody></table></div><div class="table-foot"><span id="count">Showing 6 of 28 learners</span><button class="link" id="rosterLink">View class roster →</button></div>
+    </section>
+    <footer><span>ClassPulse · A privacy-first classroom prototype</span><span>Sample overview data · Optional local session sensors</span></footer>
+  </div>
+</main><div class="toast" id="toast" role="status" aria-live="polite"></div><script src="app.js"></script>
+</body></html>

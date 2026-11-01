@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Run a local classroom session with privacy-first group activity signals and manual attendance.">
+  <title>Live Session — ClassPulse</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="session.css">
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="index.html"><span class="brandmark">✳</span>class<span>pulse</span></a><small class="section-label">WORKSPACE</small>
+  <nav><a href="index.html">◫ &nbsp; Overview</a><a href="index.html#students">♙ &nbsp; Students</a><a href="index.html#insights">▥ &nbsp; Insights</a><a class="active" href="session.html">◷ &nbsp; Live session</a></nav>
+  <div class="bottom"><div class="privacy"><b>✦ &nbsp; Private by design</b><p>Media stays in this tab.<br>No audio/video is saved.</p></div><div class="profile"><span class="avatar teacher">AM</span><span><b>Alex Morgan</b><small>Educator</small></span></div></div>
+</aside>
+<main>
+  <header><button id="menu" class="hamburger" aria-label="Toggle navigation">☰</button><div class="crumb"><a href="index.html">Workspace</a> <span>/</span> <b>Live session</b></div><div class="head-right"><span class="local-tag">LOCAL SESSION</span><span class="avatar teacher">AM</span></div></header>
+  <div class="content session-content">
+    <section class="session-title"><div><small class="eyebrow"><i></i> SESSION WORKSPACE</small><h1>Run a classroom session</h1><p>Collect simple group activity signals and take attendance. You stay in control throughout.</p></div><a class="back-link" href="index.html">← Back to overview</a></section>
+    <div class="privacy-banner"><span>🔒</span><div><b>Local processing, no recording</b><p>Camera frames and microphone levels are analyzed in this browser tab only. No video, audio, face identity, or voice identity is stored or sent anywhere.</p></div></div>
+    <section class="session-layout">
+      <div class="left-column">
+        <article class="card setup-card"><div class="panel-head"><div><h2>Session controls</h2><p>Choose what to measure, then start when your class is ready.</p></div><span class="status-chip" id="sessionStatus"><i></i> Not started</span></div>
+          <div class="setup-grid"><label class="field">Session name<input id="sessionName" type="text" maxlength="60" value="Classroom session"></label><label class="field">Class duration<select id="duration"><option value="15">15 minutes</option><option value="30" selected>30 minutes</option><option value="45">45 minutes</option><option value="60">60 minutes</option></select></label></div>
+          <div class="consent-checks"><label><input id="cameraToggle" type="checkbox"> Use camera for whole-frame movement level</label><label><input id="micToggle" type="checkbox"> Use microphone for sound activity level</label></div>
+          <p class="fine-print">Camera/microphone access is optional. Browser permission is requested only after you start. The pose model is intended for one visible person; classroom-wide counts are experimental and may miss people. Sound is energy, not speech. These signals do not establish attention or learning.</p>
+          <div class="control-row"><button class="primary" id="startButton">▶ &nbsp; Start session</button><button class="stop-button" id="stopButton" disabled>■ &nbsp; End session</button><span class="timer" id="timer">00:00</span></div>
+        </article>
+        <article class="card media-card"><div class="panel-head"><div><h2>Live session signals</h2><p>Instantaneous readings; no media is recorded.</p></div><span class="live-badge" id="liveBadge">● Idle</span></div>
+          <div class="media-grid"><div class="video-shell"><video id="video" autoplay muted playsinline hidden></video><div class="video-placeholder" id="videoPlaceholder"><span>▣</span><b>Camera is off</b><small>Enable camera above to see a live local preview</small></div><canvas id="analysisCanvas" width="160" height="90" hidden></canvas><span class="preview-label" id="previewLabel" hidden>LOCAL PREVIEW</span></div>
+            <div class="signal-stack"><div class="signal-box"><div><span>Visible poses</span><b id="poseCount">—</b></div><div class="meter"><i id="presenceMeter"></i></div><small id="presenceCaption">Camera off</small></div><div class="signal-box"><div><span id="movementLabel">Body-pose movement</span><b id="motionValue">—</b></div><div class="meter"><i id="motionMeter"></i></div><small id="motionCaption">Camera off</small></div><div class="signal-box"><div><span>Sound activity</span><b id="soundValue">—</b></div><div class="meter green-meter"><i id="soundMeter"></i></div><small id="soundCaption">Microphone off</small></div><div class="signal-box"><div><span>Low-movement interval</span><b id="inactivityTime">—</b></div><small>Group estimate only</small></div><div class="signal-box total-signal"><div><span>Activity proxy</span><b id="activityValue">—</b></div><p>Exploratory group signal only; not an attention score.</p></div></div>
+          </div>
+        <div class="trend-box"><div class="trend-title"><div><b>Session activity trend</b><small>Local five-second samples</small></div><span id="sampleCount">0 samples</span></div><div class="trend-chart" id="trendChart"><div class="trend-empty" id="trendEmpty">Start a session to see signal trends.</div></div></div>
+        </article>
+        <article class="card suggestion-card"><div class="panel-head"><div><h2>Teaching suggestions</h2><p>Simple transparent rules based on the activity proxy.</p></div><span class="rule-label">RULE-BASED</span></div><div id="suggestionList" class="suggestion-list"><div class="suggestion neutral-suggestion"><span>✦</span><p>Start a session to receive optional prompts. You decide whether any suggestion fits.</p></div></div></article>
+      </div>
+      <div class="right-column">
+        <article class="card attendance-card"><div class="panel-head"><div><h2>Attendance check-in</h2><p>Mark learners manually as they arrive.</p></div><span class="count-chip" id="attendanceCount">0 / 8</span></div><div class="attendance-tools"><button class="text-action" id="markAll">Mark all present</button><button class="text-action" id="exportCsv">Export CSV</button></div><ul class="learner-list" id="learnerList"></ul><div class="attendance-note">Timestamps are added when you mark someone present. Names are sample placeholders; change them for your own demo if needed.</div></article>
+        <article class="card log-card"><div class="panel-head"><div><h2>Attendance log</h2><p>This session only</p></div><button class="text-action" id="clearLog">Clear</button></div><div id="attendanceLog" class="attendance-log"><p class="empty-log">No attendance marks yet.</p></div></article>
+        <article class="card session-summary" id="summaryCard"><div class="panel-head"><div><h2>Session summary</h2><p id="summaryText">Your summary will appear when you end the session.</p></div></div><div class="summary-metrics"><div><b id="summaryDuration">—</b><small>duration</small></div><div><b id="summaryAttendance">0/8</b><small>present</small></div><div><b id="summaryActivity">—</b><small>avg. proxy</small></div></div><button class="text-action" id="exportSummary" disabled>Download session summary</button></article>
+      </div>
+    </section>
+    <footer><span>ClassPulse · Local session prototype</span><span>No biometric identification · No media storage · No cloud upload</span></footer>
+  </div>
+</main><div class="toast" id="toast" role="status" aria-live="polite"></div><script src="session.js"></script>
+</body></html>
